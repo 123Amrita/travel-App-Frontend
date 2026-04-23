@@ -1,0 +1,42 @@
+<div class="login-container">
+  <p-messages *ngIf="successMessage" [(value)]="successMessage"></p-messages>
+  <p *ngIf="errorMessage">{{errorMessage}}</p>
+<div class="card">
+
+  <h2 style="text-align: center;">Login</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+   <div class="field">
+    <!-- <label>User Name</label> -->
+     <input type="text" pInputText class="inputClass" formControlName="name" placeholder="Name">
+   </div>
+   <div class="field">
+    <!-- <label>Email Id</label> -->
+     <input type="email" pEmail class="inputClass" formControlName="emailId" placeholder="Email ID">
+   </div>
+   <div class="field">
+    <!-- <label>Password</label> -->
+     <input type="password" pPassword class="inputClass" formControlName="password" placeholder="Password">
+   </div>
+   <div class="row col-sm-12" style="margin-top: 33px;">
+    <button type="submit" style="width: 100%;
+    height: 40px;
+    border-radius: 16px;
+    font-size: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);margin-left: 12px;background-color: #123A63;
+    color: #ffff;" pButton >Submit</button>
+</div>
+</form>
+<div (click)="showSignup()" class="row col-sm-12">
+    <div style="text-align: center;
+    margin-top: 15px;
+    cursor: pointer;">Signup for free today</div>
+</div>
+
+</div>
+
+</div>
+
+
+
+
+

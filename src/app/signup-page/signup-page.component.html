@@ -1,0 +1,32 @@
+<div class="login-container">
+<div class="card">
+<p-messages *ngIf="successMessage" [(value)]="successMessage"></p-messages>
+   <h2 style="text-align: center;">Signup Page</h2>
+   <div class="field">
+     <!-- <span>User Name</span> -->
+     <input class="inputClass" [(ngModel)]="user.name">
+   </div>
+   <div class="field">
+     <!-- <span>Email Id</span> -->
+     <input class="inputClass" [(ngModel)]="user.emailId">
+   </div>
+   <div class="field">
+     <!-- <span>Password</span> -->
+     <input class="inputClass" [(ngModel)]="user.password">
+   </div>
+   <div class="row col-sm-12">
+      <button style="width: 100%;
+    height: 40px;
+    border-radius: 16px;
+    font-size: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);" (click)="signup(user)">Signup</button>   
+    </div>
+    <div (click)="back()" class="row col-sm-12">
+    <div style="text-align: center;
+    margin-top: 15px;
+    cursor: pointer;">Back</div>
+</div>
+</div>
+</div>
+
+

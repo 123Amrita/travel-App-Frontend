@@ -1,0 +1,40 @@
+.login-container{
+    height: 813px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/assets/sunset.jpg');
+    margin-top: -9px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 102%;
+    overflow: hidden;
+    margin-left: -9px;
+}
+
+.card{
+    backdrop-filter: blur(10px);
+    width: 425px;
+    padding: 2rem;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0, 1);
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: 45%;
+}
+
+.field{
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputClass{
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 22px;
+    height: 35px;
+    padding-left: 5%;
+}

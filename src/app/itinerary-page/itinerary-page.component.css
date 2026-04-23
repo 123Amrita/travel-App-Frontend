@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+.row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+.inputField{
+    width: 100%;
+    height: 40px;
+    border-radius: 17px;
+    border: 1px solid #eeeeee;
+    background-color: #eeeeee;
+    padding-left: 27px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.container{
+    margin-top:-13%;
+    margin-left: 0%;
+    background: #0f0f2f;
+    padding-bottom: 3%;
+}
+
+.mat-drawer-container {
+    height: 826px;
+    margin-top: -4%;
+}
+
+:host ::ng-deep .mat-drawer-inner-container {
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    width: 60px;
+    height: 800px;
+    margin-top: 20px;
+    /* margin-left: -2px; */
+    padding-left: 18px;
+}
+
+.mat-drawer-content{
+    margin-left: -3% !important;
+    padding-top: 3%;
+    padding-left: 3%;
+}
+
+.mat-drawer-side {
+    color: #ffff;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    background: rgba(15, 23, 42, 0.65);
+}
+
+:host ::ng-deep .mat-drawer-inner-container.navigate :hover{
+    background-color: #8bbff3;
+    color: #ffff;
+}
+
+:host ::ng-deep .p-dropdown{
+    width: 100%;
+    height: 40px;
+    border-radius: 17px;
+    border: 1px solid #eeeeee;
+    background-color: #eeeeee;
+    padding-left: 27px;
+    margin-top: 10px;
+}
+
+:host ::ng-deep .p-dropdown-label {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    flex: 1 1 auto;
+    width: 1%;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    margin-top: -2px;
+    margin-left: -21px;
+    font-size: 15px;
+}
+
+:host ::ng-deep .p-calendar {
+    position: relative;
+    display: inline-flex;
+    max-width: 100%;
+    width: 100%;
+    margin-left: -27px;
+}
+
+:host ::ng-deep .p-calendar .p-inputtext {
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 40px;
+    border-radius: 17px;
+    border: 1px solid #eeeeee;
+    background-color: #eeeeee;
+    padding-left: 18px;
+    margin-top: 10px !important;
+    font-size: 15px;
+}
+
+.card{
+    margin-top: 3%;
+    padding: 14px;
+    width: 86%;
+    /* background-color: #ceaca0; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease; */
+    margin-left: 9%;
+    overflow: hidden;
+    position: relative;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+}
+
+.imageCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url('/assets/uttarakhand.webp'); */
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: -29px;
+    margin-left: -24px;
+}
+
+.dayCard{
+    /* background-color: #d6c8ae; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    font-family: sans-serif;
+    overflow: hidden !important;
+    /* height: 430px; */
+    transition: 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.05);
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
+    border-radius: 16px;
+    padding: 20px;
+    padding-left: 40px;
+}
+
+.dayCard:nth-child(odd) {
+  background: #f0f9ff;
+}
+
+.dayCard:nth-child(even) {
+  background: #f8fafc;
+}
+
+.headers {
+    font-style: italic;
+    font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.icons{
+    height: 20px;
+    width: 20px;
+    margin-top: -4px;
+        margin-left: 0%;
+}
+
+.overlay{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.4),
+        rgba(0,0,0,0)
+    );
+}
+
+.dayCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+}
+
+.day-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.day-badge {
+    position: absolute;
+    left: -36px;
+    top: -2px;
+    width: 30px;
+    height: 30px;
+    background: #6366f1;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+}
+
+.day-title {
+  color: #ea580c;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  background: #ffe0c2;
+  margin-left: 1%;
+  margin-top: -0%;
+}
+
+.special-notes {
+  background: #fff4e6;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.dayCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.30);
+}
+
+.dayCard > * {
+    position: relative;
+    z-index: 1;
+}
+
+:host ::ng-deep .p-dialog-mask {
+  background: rgba(0,0,0,0.3) !important;
+  z-index: 10000 !important;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content{
+    background: transparent;
+    overflow: hidden !important;
+}
+
+.section-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 10px 0;
+}
+
+.backgroundMount{
+  background-image: url('/assets/trekking.jpg');
+  margin-left: -4%;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+  position: relative;
+  z-index: 1;
+  height: 2543px;
+  width: 120%;
+}
+
+.backgroundMount::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.create-btn {
+  color: white;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.3s;
+  cursor:pointer;
+  width: 31%;
+    height: 50px;
+    font-size: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: -1%;
+    padding-top: 13px;
+    margin-right: 22px;
+    cursor:pointer;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    letter-spacing: 0.3px;
+}
+
+.create-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.timeline-line {
+    position: absolute !important;
+    left: 18px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, #c7d2fe, #c7d2fe 6px, transparent 6px, transparent 12px);
+}
+
+.dayCard li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #1f2937;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 7%;
+  height: 50px; 
+  margin-top: -1%;
+}
+
+.back-btn i {
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background-color: #ffffff;
+  border-color: #9ca3af;
+  transform: translateX(-2px);
+}
+
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1513px;
+    }
+}
+
+.sidebarIcons{
+    font-size: 20px;
+    color: #ffff;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.2s;
+    margin-left: -24%;
+}
+
+.sidebarIcons:hover {
+    background: rgba(255, 255, 255, 0.1);
+    margin-left: -24%;
+}

@@ -1,0 +1,241 @@
+<mat-sidenav-container>
+<mat-sidenav mode="side" opened>
+<div style="margin-top: 300px">
+<div class="row navigate" (click)="goToDashboard()" class="sidebarIcons" title="Show Saved Itinerarys">
+     <i class="fa-solid fa-bookmark" style="font-size:20px;  color:#ffff"></i>
+</div>
+
+<div class="row navigate" (click)="createTravel()" class="sidebarIcons" title="Create Travel Itinerary">
+     <i class="fa-solid fa fa-suitcase" style="font-size:20px;  color:#ffff"></i>
+</div>
+</div>
+</mat-sidenav>
+<mat-sidenav-content>
+<div class="container">
+<div class="image-bg" style="margin-left: -4%;
+    margin-bottom: 21px;
+    position: absolute;
+    margin-top: -8%;">
+    <img style="height: 1000px;
+    border-radius: 16px;" src="/assets/flowersSky.jpg"/></div>
+<div class="travel">
+   <h2 style="margin-left: 0%;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;">Create your own Travel Itinerary</h2>
+
+<div style="width: 103%;margin-top: -3%;">
+<form [formGroup]="travelForms" (ngSubmit)="onSubmit()">
+    <div class="col-sm-12 row" style="margin-top: 4%;">
+      <div class="col-sm-6" >
+        <h2 style="font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;">Trip Details</h2>
+        <div class="row">
+           <label>Trip Name</label>
+           <input type="text" pInputText formControlName="travelName" class="inputField" style="margin-left: 3%;
+    width: 94%;">
+    <small class="error"
+  *ngIf="travelForms.get('travelName')?.touched && travelForms.get('travelName')?.invalid">
+  
+  <span *ngIf="travelForms.get('travelName')?.errors?.['required']">
+    Trip name is required
+  </span>
+
+  <span *ngIf="travelForms.get('travelName')?.errors?.['minlength']">
+    Minimum 3 characters required
+  </span>
+</small>
+        </div>
+        <div class="row">
+           <label>Source</label>
+           <p-dropdown type="text" pDropdown formControlName="source" [options]="places" optionLabel="name"
+           placeholder="Select a city"></p-dropdown>
+           <small class="error"
+  *ngIf="travelForms.get('source')?.touched && travelForms.get('source')?.invalid">
+  Source is required
+</small>
+        </div>
+        <div class="row">
+           <label>Destination</label>
+           <p-dropdown type="text" pDropdown formControlName="destination" [options]="destinations" optionLabel="name"
+           placeholder="Select your trek" (onChange)="showTrekDetails()"></p-dropdown>
+           <small class="error"
+  *ngIf="travelForms.get('destination')?.touched && travelForms.get('destination')?.invalid">
+  Destination is required
+</small>
+        </div>
+        </div>
+        <div class="col-sm-6" style="margin-top: 5%;">
+          <div class="row">
+           <label>Start Date</label>
+           <div class="custom-date">
+           <p-calendar #cal formControlName="startDate" [appendTo]="'body'" dataType="date"></p-calendar>
+           <i class="pi pi-calendar custom-icon" (click)="cal.toggle()"></i>
+         </div>
+         <small class="error"
+  *ngIf="travelForms.get('startDate')?.touched && travelForms.get('startDate')?.invalid">
+  Start date is required
+</small>
+        </div>
+      <div class="row">
+           <label>End Date</label>
+           <div class="custom-date">
+            <p-calendar #cal1 formControlName="endDate" [appendTo]="'body'" dataType="date"
+             [minDate]="travelForms.get('startDate')?.value"></p-calendar>
+           <i class="pi pi-calendar custom-icon" (click)="cal1.toggle()"></i>
+         </div>
+         <small class="error"
+  *ngIf="travelForms.get('endDate')?.touched && travelForms.get('endDate')?.invalid">
+  End date is required
+</small>
+
+<small class="error"
+  *ngIf="
+   travelForms.errors?.['dateInvalid'] &&
+    travelForms.get('startDate')?.value &&
+    travelForms.get('endDate')?.value
+  ">
+  End date must be after start date
+</small>
+        </div>
+        <div class="row">
+           <label>Total Budget</label>
+           <input type="text" pInputText formControlName="totalBudget" class="inputField" style="margin-left: 3%;
+    width: 94%;">
+    <small class="error"
+  *ngIf="travelForms.get('totalBudget')?.touched && travelForms.get('totalBudget')?.invalid">
+  
+  <span *ngIf="travelForms.get('totalBudget')?.errors?.['required']">
+    Trip name is required
+  </span>
+
+  <span *ngIf="travelForms.get('totalBudget')?.errors?.['min']">
+    Please keep value more than 1000.
+  </span>
+</small>
+        </div>
+      </div>
+   </div>
+
+   <div class="section-divider"></div>
+
+   <ng-container  *ngIf="AIOverview">
+<div class=" bento-grid">
+    <div class="bento-item wide">
+    <h2>{{destinationName}}</h2>
+    <p style="margin-top: -2%;">{{AIOverview.description}}</p>
+    </div>
+
+    <div class="bento-item small">
+    <h2>Best Time to visit</h2>
+    <p style="margin-top: -2%;">{{AIOverview.best_time_to_go}}</p>
+    </div>
+
+    <div class="bento-item small">
+    <h2>Difficulty</h2>
+    <p style="margin-top: -2%;">{{AIOverview.difficulty}}</p>
+    </div>
+
+    <div class="bento-item tall">
+    <h2>Highlights</h2>
+    <ul style="margin-left: -10%;margin-top: -6%;">
+      <li *ngFor="let h of AIOverview.highlights">{{h}}
+      </li>
+    </ul>
+    </div>
+
+    <div class="bento-item tall">
+    <h2>Treks to Cover</h2>
+    <ul style="margin-left: -10%;margin-top: -6%;">
+      <li *ngFor="let t of AIOverview.treks_to_cover">{{t}}
+      </li>
+    </ul>
+    </div>
+
+    <div style="grid-column: span 2;"><img style="height: 253px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 16px;" [src]="trekPic"/></div>
+
+    </div>
+        </ng-container>
+
+   <div *ngIf="AIOverview" class="section-divider"></div>
+
+
+<div class="col-sm-12 row">
+      <div class="col-sm-6">
+        <h2 style="font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;">Preferences</h2>
+       <div class="row">
+           <label>Stay Preference</label>
+           <p-dropdown type="text" pDropdown formControlName="stayPreference" [options]="stayPreferenceOptions" optionLabel="name"
+           placeholder="Select Stay Preference"></p-dropdown>
+           <small class="error"
+  *ngIf="travelForms.get('stayPreference')?.touched && travelForms.get('stayPreference')?.invalid">
+  Stay Preference is required
+</small>
+        </div>
+      <div class="row">
+           <label>Level of difficulty</label>
+           <p-dropdown type="text" pDropdown formControlName="difficulty" [options]="difficultyOptions" optionLabel="name"
+           placeholder="Select level of difficulty"></p-dropdown>
+           <small class="error"
+  *ngIf="travelForms.get('difficulty')?.touched && travelForms.get('difficulty')?.invalid">
+  Level in difficulty is required
+</small>
+        </div>  
+        <div class="row">
+           <label>Group Type</label>
+           <p-dropdown type="text" pDropdown formControlName="groupType" [options]="groupTypeOptions" optionLabel="name"
+           placeholder="Select Group Type"></p-dropdown>
+           <small class="error"
+  *ngIf="travelForms.get('groupType')?.touched && travelForms.get('groupType')?.invalid">
+  Group Type is required
+</small>
+        </div> 
+        
+      </div>
+      <div class="col-sm-6" style="margin-top: 5%;">
+        <div class="row">
+           <label>Food Preference</label>
+           <p-dropdown type="text" pDropdown formControlName="foodPreference" [options]="foodPreferenceOptions" optionLabel="name"
+           placeholder="Select Food Preference"></p-dropdown>
+           <small class="error"
+  *ngIf="travelForms.get('foodPreference')?.touched && travelForms.get('foodPreference')?.invalid">
+  Food Preference is required
+</small>
+        </div>
+        <div class="row">
+           <label>Special Notes</label>
+           <input style="width: 98%;
+    margin-left: 1.5%;" type="text" pInputText formControlName="specialNotes" class="inputField" style="margin-left: 3%;
+    width: 95%;">
+    <small class="error"
+  *ngIf="travelForms.get('specialNotes')?.touched && travelForms.get('specialNotes')?.invalid">
+  
+  <span *ngIf="travelForms.get('specialNotes')?.errors?.['required']">
+    Special Notes is required
+  </span>
+</small>
+    </div>
+      </div>
+   </div>
+
+    <button type="submit" pButton class="create-btn">Create Itinerary</button>
+</form>
+</div>
+</div>
+
+</div>
+<!-- <div class="card flex justify-center"> -->
+            <!-- <p-progressSpinner ariaLabel="loading" /> -->
+            <p-dialog [(visible)]="spinnerOn" [modal]="true" [closable]="false" [showHeader]="false" [style]="{width: '120px', background: 'transparent', boxShadow: 'none', border: 'none'}">
+               <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+            </p-dialog>
+    <!-- </div> -->
+</mat-sidenav-content>
+</mat-sidenav-container>
+

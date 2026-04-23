@@ -1,0 +1,114 @@
+<mat-sidenav-container>
+    <mat-sidenav mode="side" opened>
+        <div style="margin-top: 300px">
+            <div class="row navigate" (click)="goToDashboard()" class="sidebarIcons"
+                title="Show Saved Itinerarys">
+                <i class="fa-solid fa-bookmark" ></i>
+            </div>
+
+            <div class="row navigate" (click)="createTravel()" class="sidebarIcons"
+                title="Create Travel Itinerary">
+                <i class="fa-solid fa fa-suitcase"></i>
+            </div>
+        </div>
+
+    </mat-sidenav>
+    <mat-sidenav-content style="margin-left: 0%;
+    padding-top: 3%;
+    padding-left: 4%;height: 829px;">
+    <div class="trekOptions">
+<div style="margin-left: 35px;
+    margin-top: 27px;
+    color: #d4c7c7;">
+            <h2 style="font-size: 26px;
+    font-weight: 600;">Hello {{userName}}!</h2>
+            <p style="font-size: 14px;">Welcome back and explore trekking with us.</p>
+
+            <div style="    font-family: 'Inter', sans-serif;
+    margin-top: 53px;
+    font-size: 20px;
+    font-weight: 600;">Explore the best Treks in India and plan your Itinerary</div>
+        </div>
+
+        <div class="card" style="width: 97%;
+    margin-top: 16px;
+    margin-left: 20px;border: none !important;
+    box-shadow: none !important;">
+
+            <p-carousel [value]="destinations" [numVisible]="2" [numScroll]="1" [circular]="true"
+                [responsiveOptions]="responsiveOptions" [showIndicators]="false">
+                <ng-template let-trip pTemplate="item">
+                    <div
+                        style="border: none !important;position: relative;width: 650px;height: 500px;overflow: hidden;border-radius: 25px;">
+                        <div class="wrapper">
+                            <div class="overlay"></div>
+                        <img [src]="trip.picture" [alt]="trip.name" class="w-full rounded-border" style="object-fit: cover;
+    border-radius: 25px !important;
+    position: relative;
+    z-index: 0;
+    height: 100%;
+    width: 100%;" />
+                        </div>
+                        
+                        <div style="color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+    position: absolute;
+    z-index: 2;
+    margin-top: -28%;
+    margin-left: 2%;">{{ trip.name }}</div>
+                        <div style="color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    font-weight: 500;
+    position: absolute;
+    z-index: 2;
+    margin-top: -23%;
+    margin-left: 2%;
+    line-height: 1.5;"> {{ trip.description }}</div>
+                        <div class="planTrip" (click)="goToCreateItinerary(trip.name)"> Plan Your Trip </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+        <div style="background: radial-gradient(circle at top, #1e293b, #020617);padding: 40px;" class="card">
+            <p style="margin-top: 20px;
+    margin-left: 10px;
+    font-size: 22px;
+    font-weight: 800;color: #d4c7c7;">Saved Itinerary List for you</p>
+            <div style="margin-top:10px">
+                
+                <div class="saved-container">
+                    <div class="saved-card" *ngFor="let trip of tripList">
+                        <img [src]="trip.picture" class="thumb" />
+
+                        <div class="content">
+                            <h4 style="font: 500 16px / 24px 'Inter', sans-serif;
+    letter-spacing: .03125em;
+    margin: 0 0 16px;
+    margin-top: 7px;color: #fff;">{{trip.travelName}}</h4>
+                            <p style="font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);">{{ trip.days }} Days | Difficulty Level- {{ trip.difficulty }}</p>
+                            <p style="font-size: 14px;
+    font-weight: 600;
+    color: #38bdf8;">Total Budget- {{ trip.totalBudget }}</p>
+                            <i class="fa-solid fa-trash" title="Delete the trip" style="font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.2s;
+    border-radius: 50%;
+    padding: 2px;" (click)="deleteTrip(trip._id)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p-dialog [(visible)]="spinnerOn" [modal]="true" [closable]="false" [showHeader]="false" [style]="{width: '120px', background: 'transparent', boxShadow: 'none', border: 'none'}">
+               <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+    </p-dialog>
+    </mat-sidenav-content>
+</mat-sidenav-container>

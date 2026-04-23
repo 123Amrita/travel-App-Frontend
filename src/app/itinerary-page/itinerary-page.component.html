@@ -1,0 +1,113 @@
+<mat-sidenav-container>
+<mat-sidenav mode="side" opened>
+<div style="margin-top: 300px">
+<div class="row navigate" (click)="goToDashboard()" class="sidebarIcons" title="Show Saved Itinerarys">
+     <i class="fa-solid fa-bookmark" style="font-size:20px;  color:#ffff"></i>
+</div>
+
+<div class="row navigate" (click)="createTravel()" class="sidebarIcons" title="Create Travel Itinerary">
+     <i class="fa-solid fa fa-suitcase" style="font-size:20px;  color:#ffff"></i>
+</div>
+</div>
+</mat-sidenav>
+<mat-sidenav-content>
+<div class="container">
+<div class="backgroundMount">
+    <!-- <img style="height: 2000px;
+    border-radius: 16px;" src="/assets/trekking.jpg"/> -->
+    
+    </div>
+<!-- <div style="margin-left: -2%;
+    background-color: #0f0f2f;height: 222%;
+    width: 102%;
+    margin-top: -3%;
+    position: absolute;"></div> -->
+
+<div *ngIf="dayCards && dayCards.length > 0" style=" margin-top: -137%;
+    color: #e6d9d9;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 9%;z-index: 1000;position: relative;    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">{{trekName}}</div>
+<div class="card" *ngIf="dayCards && dayCards.length > 0">
+
+<div style="margin-top: 2%;
+    font-size: 15px;
+    padding: 20px;
+    display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;">
+    <div *ngFor="let day of dayCards" class="dayCard">
+        <!-- <img style="height: 600px;
+    width: 1500px;
+    margin-left: -4%;
+    margin-top: -24%;" src="/assets/hiking-animated.jpg"/> -->
+    <div class="timeline-line"></div>
+    <div style="position: relative;
+    z-index: 3000;">
+        <div class="day-header">
+            <span class="day-badge">{{day.day}}</span> <span class="day-title">{{ day.title }}</span>
+        </div>
+       <p style="margin-top: 7%;"><img class="icons" src="/assets/map.png"/><b style="font-weight: 700;
+    color: #2c3e50;
+    font-size: 17px;"> {{ day.location }}</b></p>
+
+    <div class="section-divider"></div>
+       <ul *ngIf="day.activities.length > 0">
+         <!-- <img class="icons" src="/assets/woman.png"/> -->
+         <li *ngFor="let act of day.activities">{{ act }}</li>
+       </ul>
+       <p *ngIf="day.stay.length > 0"><img class="icons" src="/assets/homestay.png"/>
+        <b style="font-weight: 700;
+    color: #2c3e50;
+    font-size: 17px;"> Stay: </b>{{ day.stay.join(', ')}}</p>
+
+       <p *ngIf="day.food.length > 0"><img class="icons" src="/assets/bibimbap.png"/><b style="font-weight: 700;
+    color: #2c3e50;
+    font-size: 17px;"> Food: </b> {{ day.food.join(', ')}}</p>
+
+<div class="section-divider"></div>
+
+       <p *ngIf="day.highlights.length > 0"><img class="icons" src="/assets/star.png"/><b style="font-weight: 700;
+    color: #2c3e50;
+    font-size: 17px;"> Highlights: </b></p>
+       <ul *ngIf="day.highlights.length > 0">
+        <li *ngFor="let h of day.highlights || []">{{h}}</li>
+       </ul>
+       <p *ngIf="day.special_notes.length > 0"><img class="icons" src="/assets/sticky-note.png"/><b style="font-weight: 700;
+    color: #2c3e50;
+    font-size: 17px;"> Scenic Spots not to miss: </b></p>
+        <ul *ngIf="day.scenic_Spots.length > 0">
+            <li *ngFor="let p of day.scenic_Spots || []">{{p}} </li>
+        </ul>
+        <p *ngIf="day.special_notes.length > 0"><img class="icons" src="/assets/sticky-note.png"/><b style="font-weight: 700;
+    color: #2c3e50;
+    font-size: 17px;"> Special Notes: </b></p>
+        <ul *ngIf="day.special_notes.length > 0">
+            <li *ngFor="let s of day.special_notes || []">{{s}} </li>
+        </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 2%;
+    margin-left: 2%;">
+<button type="button" pButton class="create-btn" (click)="saveItinerary()">Save your Itinerary</button>
+<button class="back-btn" (click)="goBack()">
+  <i class="pi pi-arrow-left"></i>
+  Back
+</button>
+</div>
+
+</div>
+
+</div>
+
+<p-dialog [(visible)]="spinnerOn" [modal]="true" [closable]="false" [showHeader]="false" [style]="{width: '120px', background: 'transparent', boxShadow: 'none', border: 'none'}">
+               <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+</p-dialog>
+</mat-sidenav-content>
+</mat-sidenav-container>
+
+
