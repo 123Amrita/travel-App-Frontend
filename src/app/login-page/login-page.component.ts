@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { UserModel } from '../models/user-model';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
@@ -27,6 +28,7 @@ export class LoginPageComponent {
   public signupDiv: boolean= false;
   successMessage: any[]=[];
   loginForm!: FormGroup;
+  platformId = inject(PLATFORM_ID);
 
   userData$ : Observable<UserModel>;
 
@@ -50,10 +52,12 @@ export class LoginPageComponent {
         this.AuthService.login(this.loginForm.value).subscribe((res : any) => {
           console.log(res);
           if(res.token && res.message === "User successfully logged in"){
-             sessionStorage.setItem("token", res.token);
+             if(isPlatformBrowser(this.platformId)) {
+               sessionStorage.setItem("token", res.token);
+               localStorage.setItem('token', res.token);
+               localStorage.setItem('user', JSON.stringify(res.userData));
+             }
              this.successMessage= [{summary : 'Success', detail: "User successfully logged in"}];
-             localStorage.setItem('token', res.token);
-             localStorage.setItem('user', JSON.stringify(res.userData));
              if(res.userData){
              this.store.dispatch(saveUserData({user: res.userData}));
              }

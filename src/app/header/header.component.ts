@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { AppState } from '../store/state/state';
 import { Store } from '@ngrx/store';
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
 //userName = localStorage.getItem('username') || 'User';
+private platformId = inject(PLATFORM_ID);
 userData$: Observable<UserModel>;
 userName: String= "";
 url: string="";
@@ -29,7 +31,9 @@ url: string="";
   }
 
   logout() {
-    localStorage.clear();
+    if(isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+    }
     this.router.navigate(['/loginPage']);
   }
 }

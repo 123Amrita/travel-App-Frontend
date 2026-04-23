@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  private baseURL= "http://localhost:3800";
+  private baseURL= "https://login-project-ntv9.onrender.com";
   public itineraryData: any;
 
   travelFormData: any = null;
@@ -49,6 +49,7 @@ getFormData() {
 
   getTripList(){
     return this.http.get(this.baseURL + '/api/auth/getTripList');
+    //return of({ data: [] });
   }
 
   deleteTrip(id : any){

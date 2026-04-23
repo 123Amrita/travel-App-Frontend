@@ -107,8 +107,11 @@
         </div>
     </div>
 
-    <p-dialog [(visible)]="spinnerOn" [modal]="true" [closable]="false" [showHeader]="false" [style]="{width: '120px', background: 'transparent', boxShadow: 'none', border: 'none'}">
+    <div *ngIf="spinnerOn && isBrowser(platformId)">
+        <p-dialog [(visible)]="spinnerOn" [modal]="true" [closable]="false" [showHeader]="false" [style]="{width: '120px', background: 'transparent', boxShadow: 'none', border: 'none'}">
                <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
-    </p-dialog>
+        </p-dialog>
+    </div>
+    
     </mat-sidenav-content>
 </mat-sidenav-container>

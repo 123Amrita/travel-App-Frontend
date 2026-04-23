@@ -12,5 +12,5 @@ import { saveUserReducer } from './store/reducers/reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(withInterceptors([authInterceptorInterceptor])), provideAnimationsAsync(),
-   provideStore({ userData: saveUserReducer}), provideEffects()]
+   provideStore({ userData: saveUserReducer})]
 };
