@@ -43,7 +43,7 @@ export class CreateTravelPlanComponent {
                           {name: "Dzongri – Goecha La Trek, Sikkim", picture: "assets/Goecha-La-Trek-Sikkim.webp"},
                           {name: "Markha Valley Trek, Ladakh", picture: "assets/Markha.jpg"},
                           {name: "Rajmachi Trek, Maharashtra", picture: "assets/rajmachi.jpg"},
-                          {name: "Sandakphu Phalut Trek, West Bengal", picture: "assets/+(2).avif"}
+                          {name: "Sandakphu Phalut Trek, West Bengal", picture: "assets/sandakphu.avif"}
 
       ];
     public difficultyOptions= [{name: "Hard"},

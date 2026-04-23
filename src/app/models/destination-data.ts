@@ -25,7 +25,7 @@ export const DESTINATIONS= [{name: "Triund Trek, Himachal Pradesh", picture: "as
                           {name: "Rajmachi Trek, Maharashtra", picture: "assets/rajmachi.jpg",
                             description: "Rajmachi trek in Maharashtra is a popular trail near Lonavala, leading to the historic Rajmachi Fort. The route passes through lush forests, waterfalls, and scenic valleys. It’s accessible year-round, with monsoon adding charm. The trek blends adventure, history, and nature, offering panoramic views of the Sahyadri mountains."
                           },
-                          {name: "Sandakphu Phalut Trek, West Bengal", picture: "assets/+(2).avif",
+                          {name: "Sandakphu Phalut Trek, West Bengal", picture: "assets/sandakphu.avif",
                             description: "Sandakphu–Phalut trek in West Bengal is famed for panoramic views of the world’s tallest peaks, including Everest, Kanchenjunga, Lhotse, and Makalu. The trail winds through Singalila National Park, rich in flora and fauna. Moderate in difficulty, it rewards trekkers with breathtaking sunrises and unforgettable Himalayan vistas."
                           }
 
