@@ -72,24 +72,29 @@ export class UsersListComponent {
             }
        ];
     this.spinnerOn= false;
+    this.fetchUsersList();
   }
 
   ngAfterViewInit(){
     console.log('ngAfterViewInit called');
     console.log('isPlatformBrowser:', isPlatformBrowser(this.platformId));
-    this.fetchUsersList();
+    //this.fetchUsersList();
   }
 
   fetchUsersList(){
     console.log('fetchUsersList called');
     this.spinnerOn= true;
-    this.authService.getTripList().subscribe({
+    let userId = '';
+    if(isPlatformBrowser(this.platformId)) {
+      userId = JSON.parse(localStorage?.getItem("user") || '{}')._id;
+    }
+    this.authService.getTripList({"userId": userId}).subscribe({
       next: (res: any) => {
         console.log('API Response:', res);
-        this.tripList = res.data;
+        this.tripList = res.data.sort((a: ItineraryModel, b: ItineraryModel) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         this.tripList.forEach( x => {
         if(x.destination){
-        let picture= this.destinations.filter(des => des.name === x.destination)[0];
+        let picture= this.destinations.filter(des => des.name === x.destination.name)[0];
         if(picture){
         x.picture= picture.picture
         }
@@ -114,6 +119,8 @@ export class UsersListComponent {
   }
 
   createTravel(){
+    this.authService.showTravelData= false;
+    this.authService.storedDestination= "";
     this.Router.navigate(['/createTravel']);
   }
 
@@ -122,14 +129,28 @@ export class UsersListComponent {
   }
 
   deleteTrip(id : string){
+    this.spinnerOn= true;
     this.authService.deleteTrip({"id": id}).subscribe((res : any) => {
        console.log(res);
+       this.fetchUsersList();
     })
   }
 
   goToCreateItinerary(destination :string){
     this.authService.storedDestination= destination;
+    this.authService.showTravelData= false;
+    this.authService.editItinerary= false;
     this.Router.navigate(['/createTravel']);
   }
 
+  showSavedItinerary(trip: ItineraryModel){
+    this.authService.itineraryData= JSON.parse(trip.AIOverview);
+    this.authService.travelData= trip;
+    this.authService.editItinerary= false;
+    this.authService.itineraryFromDashboard= true;
+    this.authService.setFormData(trip);
+    this.authService.storedDestination= trip.destination.name;
+    this.authService.editTripId= trip._id;
+    this.Router.navigate(['/iteneraryPage']);
+  }
 }

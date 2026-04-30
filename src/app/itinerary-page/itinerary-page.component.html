@@ -11,28 +11,46 @@
 </div>
 </mat-sidenav>
 <mat-sidenav-content>
-<div class="container">
-<div class="backgroundMount">
-    <!-- <img style="height: 2000px;
-    border-radius: 16px;" src="/assets/trekking.jpg"/> -->
-     
+    <div style="margin-left: 6%;
+    margin-top: 2%;">
+<button class="back-btn1" (click)="goToDashboard()">
+  ← Back to Trips
+</button>
     </div>
-<!-- <div style="margin-left: -2%;
-    background-color: #0f0f2f;height: 222%;
-    width: 102%;
-    margin-top: -3%;
-    position: absolute;"></div> -->
+    <div class="print-only print-header">
+  <h1>{{trekName}}</h1>
+  <div><span> From: {{ authService.travelData?.source?.name }}</span>
+  <span> , {{ authService.travelData?.days }} Days</span>
+  <span> , {{ authService.travelData?.totalBudget }}</span>
+  <span> , Difficulty: {{ authService.travelData?.difficulty?.name }}</span>
+</div>
+ 
+</div>
+<div class="container">
 
-<div *ngIf="dayCards && dayCards.length > 0" style=" margin-top: -137%;
-    color: #e6d9d9;
-    font-family: 'Poppins', sans-serif;
-    margin-left: 9%;z-index: 1000;position: relative;    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">{{trekName}}</div>
-<div class="card" *ngIf="dayCards && dayCards.length > 0">
+<div class="backgroundMount">
+</div>
+  
+<div class="itinerary-header" *ngIf="dayCards && dayCards.length > 0">
+   <h2 class="tripName">{{trekName}}</h2>
 
-<div style="margin-top: 2%;
+<div class="itinerary-actions" *ngIf="authService.itineraryFromDashboard">
+    <button class="btn edit-btn" (click)="editItinerary()"><i class="fa-solid fa-pencil" style="font-size:14px;  color:#ffff"></i> Edit</button>
+    <button class="btn delete-btn" (click)="deleteItinerary()"><i class="fa-solid fa-trash" style="font-size:14px;  color:#ffff"></i> Delete</button>
+    <button class="btn download-btn" (click)="downloadItinerary()"><i class="fa-solid fa-download" style="font-size:14px;  color:#ffff"></i> Download</button>
+  </div>
+
+    <div class="trip-summary" *ngIf="authService.itineraryFromDashboard">
+  <div>📍 From: {{ authService.travelData?.source?.name }}</div>
+  <div>📅 {{ authService.travelData?.days }} Days</div>
+  <div>💰 {{ authService.travelData?.totalBudget }}</div>
+  <div>🎯 Difficulty: {{ authService.travelData?.difficulty?.name }}</div>
+</div>
+</div>
+
+<div class="card" [style.marginTop]="!authService.itineraryFromDashboard ? '-1%' : '0%'" *ngIf="dayCards && dayCards.length > 0">
+
+<div style="margin-top: 0%;
     font-size: 15px;
     padding: 20px;
     display: grid;
@@ -75,7 +93,7 @@
        <ul *ngIf="day.highlights.length > 0">
         <li *ngFor="let h of day.highlights || []">{{h}}</li>
        </ul>
-       <p *ngIf="day.special_notes.length > 0"><img class="icons" src="/assets/sticky-note.png"/><b style="font-weight: 700;
+       <p *ngIf="day.scenic_Spots.length > 0"><img class="icons" src="/assets/camera.png"/><b style="font-weight: 700;
     color: #2c3e50;
     font-size: 17px;"> Scenic Spots not to miss: </b></p>
         <ul *ngIf="day.scenic_Spots.length > 0">
@@ -93,8 +111,9 @@
 
 <div class="row" style="margin-top: 2%;
     margin-left: 2%;">
-<button type="button" pButton class="create-btn" (click)="saveItinerary()">Save your Itinerary</button>
-<button class="back-btn" (click)="goBack()">
+<button type="button" pButton class="create-btn" *ngIf="!authService.itineraryFromDashboard && !authService.editItinerary" (click)="saveItinerary()">Save your Itinerary</button>
+<button type="button" pButton class="create-btn" *ngIf="authService.editItinerary" (click)="updateItinerary()">Update your Itinerary</button>
+<button class="back-btn" (click)="goBack()" *ngIf="!authService.itineraryFromDashboard && !authService.editItinerary">
   <i class="pi pi-arrow-left"></i>
   Back
 </button>

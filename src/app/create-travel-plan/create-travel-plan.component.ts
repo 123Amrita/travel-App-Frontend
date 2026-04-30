@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MessagesModule } from 'primeng/messages';
@@ -65,6 +65,7 @@ export class CreateTravelPlanComponent {
     public trekPic: string= "";
     public destinationName: String= "";
     public spinnerOn: boolean= true;
+    @ViewChild('travelDiv') travelDiv!: ElementRef;
 
     constructor(public formBuilder: FormBuilder, public authService: AuthService, public router: Router){}
 
@@ -74,8 +75,8 @@ export class CreateTravelPlanComponent {
         travelName: ['', [Validators.required, Validators.minLength(3)]],
         source: ['', Validators.required],
         destination: ['', Validators.required],
-        startDate: [new Date() as Date, Validators.required],
-        endDate: [new Date() as Date, Validators.required],
+        startDate: ['', Validators.required],
+        endDate: ['', Validators.required],
         totalBudget: ['', [Validators.required, Validators.min(1000)]],
         difficulty: ['', Validators.required],
         groupType: ['', Validators.required],
@@ -94,7 +95,7 @@ export class CreateTravelPlanComponent {
       };
       const savedData = this.authService.getFormData();
 
-      if (savedData) {
+      if (savedData && this.authService.showTravelData) {
       this.travelForms.patchValue(savedData);
       this.travelForms.patchValue({startDate : new Date(savedData.startDate) as Date});
       this.travelForms.patchValue({endDate : new Date(savedData.endDate) as Date});
@@ -139,24 +140,28 @@ export class CreateTravelPlanComponent {
 
   onSubmit(){
     if (this.travelForms.invalid) {
+    this.travelDiv.nativeElement.scrollIntoView({ behavior: 'smooth' });
     this.travelForms.markAllAsTouched();
     return;
     }
-    if(this.travelForms.valid){
-      this.authService.setFormData(this.travelForms.value);
+    if(this.travelForms.valid){   
       this.travelForms.value.startDate= this.travelForms.value.startDate.toString();
       this.travelForms.value.endDate= this.travelForms.value.endDate.toString();
+      // let data= new ItineraryModel();
+      // data = this.travelForms.value;
+      // data.userId= JSON.parse(localStorage.getItem("user") || '{}')._id;
       this.spinnerOn= true;
       this.authService.createItinerary(this.travelForms.value).subscribe((res : any) => {
         console.log(res);
-        //this.authService.itineraryData= res.overview;
-        //let overview= res.overview.split('\n\n```json')[1];
-        //let trek= overview.split('```\n\n**')[0];
         if(res){
         this.spinnerOn= false;
         this.authService.itineraryData= JSON.parse(res.overview);
         console.log(this.authService.itineraryData);
         this.authService.travelData= this.travelForms.value;
+        this.authService.travelData.destination= this.travelForms.value.destination;
+        this.authService.travelData._id= this.authService.editTripId;
+        this.authService.itineraryFromDashboard= false;
+        this.authService.setFormData(this.travelForms.value);
         this.router.navigate(['/iteneraryPage']);
         }    
       }
@@ -164,7 +169,9 @@ export class CreateTravelPlanComponent {
   }
 }
 
-createTravel(){
+  createTravel(){
+    this.authService.showTravelData= false;
+    this.authService.storedDestination= "";
     this.router.navigate(['/createTravel']);
   }
 

@@ -13,11 +13,13 @@ import { AppState } from '../store/state/state';
 import { Observable } from 'rxjs';
 import { getUserData } from '../store/selectors/selectors';
 import { saveUserData } from '../store/actions/actions';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [FormsModule, CommonModule, MessagesModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, MessagesModule, ReactiveFormsModule, ProgressSpinnerModule,DialogModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
@@ -29,8 +31,9 @@ export class LoginPageComponent {
   successMessage: any[]=[];
   loginForm!: FormGroup;
   platformId = inject(PLATFORM_ID);
-
+  public spinnerOn: boolean= false;
   userData$ : Observable<UserModel>;
+  isLoginMode = true;
 
   constructor(private http: HttpClient, private AuthService: AuthService, private Router: Router, private formBuilder: FormBuilder
     , private store: Store<AppState>
@@ -48,9 +51,16 @@ export class LoginPageComponent {
   }
 
     onSubmit() {
+    //if(this.isLoginMode === true){
+    if (this.loginForm.invalid) {
+    this.loginForm.markAllAsTouched();
+    return;
+    }
       if(this.loginForm.valid){
+        this.spinnerOn= true;
         this.AuthService.login(this.loginForm.value).subscribe((res : any) => {
           console.log(res);
+          this.spinnerOn= false;
           if(res.token && res.message === "User successfully logged in"){
              if(isPlatformBrowser(this.platformId)) {
                sessionStorage.setItem("token", res.token);
@@ -72,10 +82,31 @@ export class LoginPageComponent {
       }else{
         this.errorMessage= 'Please fill the mandatory fields';
       }
-      
+    //}    
     }
 
-    showSignup(){
-      this.Router.navigate(['/signup']);
+    signup(){
+      if(this.isLoginMode === true){
+      this.spinnerOn= false;
+      this.loginForm.reset();
+      this.errorMessage = '';
+      this.successMessage = [];
+      this.isLoginMode= false;
+      }else{
+        this.spinnerOn= true;
+         this.AuthService.signup(this.loginForm.value).subscribe((res : any) => {
+        console.log(res);
+        if (res) {
+          this.successMessage= [{summary : 'Success', detail: "User successfully logged in"}];
+          this.Router.navigate(["/loginPage"]);
+        }
+        this.spinnerOn= false;
+      },
+        error => {
+          this.errorMessage = error.error.message;
+          this.spinnerOn= false;
+        })
+      }
+      
     }
 }

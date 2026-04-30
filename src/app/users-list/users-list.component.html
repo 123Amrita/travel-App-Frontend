@@ -24,10 +24,10 @@
     font-weight: 600;">Hello {{userName}}!</h2>
             <p style="font-size: 14px;">Welcome back and explore trekking with us.</p>
 
-            <div style="    font-family: 'Inter', sans-serif;
-    margin-top: 53px;
-    font-size: 20px;
-    font-weight: 600;">Explore the best Treks in India and plan your Itinerary</div>
+            <div style="font-size: 22px;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin-bottom: 2%;margin-top: 3%;">Explore the best Treks in India and plan your Itinerary</div>
         </div>
 
         <div class="card" style="width: 97%;
@@ -65,43 +65,43 @@
     margin-top: -23%;
     margin-left: 2%;
     line-height: 1.5;"> {{ trip.description }}</div>
-                        <div class="planTrip" (click)="goToCreateItinerary(trip.name)"> Plan Your Trip </div>
+                        <button class="planTrip" (click)="goToCreateItinerary(trip.name)"> Plan Your Trip </button>
                     </div>
                 </ng-template>
             </p-carousel>
         </div>
         <div style="background: radial-gradient(circle at top, #1e293b, #020617);padding: 40px;" class="card">
-            <p style="margin-top: 20px;
-    margin-left: 10px;
-    font-size: 22px;
-    font-weight: 800;color: #d4c7c7;">Saved Itinerary List for you</p>
+            <p style="font-size: 22px;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin-bottom: 20px;margin-top: 1%;">Your Saved Trips</p>
             <div style="margin-top:10px">
                 
-                <div class="saved-container">
-                    <div class="saved-card" *ngFor="let trip of tripList">
+                <div class="saved-container" *ngIf="tripList && tripList.length > 0">
+                    <div class="saved-card" *ngFor="let trip of tripList" (click)="showSavedItinerary(trip)">
                         <img [src]="trip.picture" class="thumb" />
 
                         <div class="content">
-                            <h4 style="font: 500 16px / 24px 'Inter', sans-serif;
-    letter-spacing: .03125em;
-    margin: 0 0 16px;
-    margin-top: 7px;color: #fff;">{{trip.travelName}}</h4>
+                            <h4 style="font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 8px 0;">{{trip.travelName}}</h4>
                             <p style="font-size: 13px;
-    color: rgba(255, 255, 255, 0.7);">{{ trip.days }} Days | Difficulty Level- {{ trip.difficulty }}</p>
-                            <p style="font-size: 14px;
-    font-weight: 600;
-    color: #38bdf8;">Total Budget- {{ trip.totalBudget }}</p>
-                            <i class="fa-solid fa-trash" title="Delete the trip" style="font-size: 16px;
-    cursor: pointer;
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    transition: 0.2s;
-    border-radius: 50%;
-    padding: 2px;" (click)="deleteTrip(trip._id)"></i>
+  color: #9ca3af;
+  display: flex;
+  gap: 10px;">{{ trip.days }} Days | Difficulty Level- {{ trip.difficulty?.name }}</p>
+                            <p style="margin-top: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #38bdf8;">Total Budget- {{ trip.totalBudget }}</p>
+                            <!-- <i class="fa-solid fa-trash delete-btn" title="Delete the trip" 
+                             (click)="deleteTrip(trip._id)"></i> -->
                         </div>
                     </div>
+                </div>
+
+                <div class="saved-container" *ngIf="!tripList || tripList.length == 0">
+                     There are no saved itinerarys yet. Start planning your trek journey and save your itinerarys here.                
                 </div>
             </div>
         </div>

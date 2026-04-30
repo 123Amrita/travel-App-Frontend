@@ -33,20 +33,42 @@ export class ItineraryPageComponent {
 
   ngOnInit(){
     this.spinnerOn= false;
+
+    if(!this.authService.itineraryFromDashboard){
+
     if(this.authService.travelData){
-    this.trekPic= this.authService.travelData.destination.picture;
     this.trekName= this.authService.travelData.destination.name;
     }
     if(this.authService.itineraryData){
-    //this.overview= this.formatText(this.authService.itineraryData);
-
     this.dayCards= this.authService.itineraryData.itinerary;
     }
+
+    }else{
+
+    if(this.authService.travelData){
+    this.trekName= this.authService.travelData.destination.name;
+    }
+    if(this.authService.itineraryData){
+    this.dayCards= this.authService.itineraryData;
+    }
+
+    }
+
+    //this.authService.travelData?.forEach( (x : any)=> {
+    let start= this.authService.travelData?.startDate;
+    let end= this.authService.travelData?.endDate;
+    if(start && end){
+          let date1= new Date(end);
+          let date2= new Date(start);
+          this.authService.travelData.days= (date1.getDate()- date2.getDate());
+        };
   }
 
   saveItinerary(){
-    this.authService.travelData.AIOverview= (this.authService.itineraryData).toString();
+    this.authService.travelData.AIOverview= JSON.stringify(this.authService.itineraryData.itinerary);
     this.spinnerOn= true;
+    this.authService.travelData.userId= JSON.parse(localStorage.getItem("user") || '{}')._id;
+    this.authService.travelData.createdAt= new Date();
     this.authService.saveItinerary(this.authService.travelData).subscribe( (res : any) => {
       if(res.status === 200){
         this.spinnerOn= false;
@@ -60,6 +82,8 @@ export class ItineraryPageComponent {
   }
 
   createTravel(){
+    this.authService.showTravelData= false;
+    this.authService.storedDestination= "";
     this.router.navigate(['/createTravel']);
   }
 
@@ -68,7 +92,39 @@ export class ItineraryPageComponent {
   }
 
   goBack(){
+    this.authService.showTravelData= true;
     this.router.navigate(['/createTravel']);
+  }
+
+  editItinerary(){
+    this.authService.showTravelData= true;
+    this.authService.editItinerary= true;
+    this.router.navigate(['/createTravel']);
+  }
+
+  deleteItinerary(){
+    this.spinnerOn= true;
+    this.authService.deleteTrip({"id": this.authService.travelData._id}).subscribe((res : any) => {
+       console.log(res);  
+    })
+  }
+
+  updateItinerary(){
+   this.spinnerOn= true;
+   this.authService.updateItinerary(this.authService.travelData).subscribe( (res : any) => {
+      if(res.status === 200){
+        this.spinnerOn= false;
+        this.message= "Your Trip Plan is updated and saved.";
+        this.router.navigate(['/usersList']);
+      }
+    },
+    (error) => {
+      this.message= "There's some issue saving this. Please try again later.";
+    })
+  }
+
+  downloadItinerary(){
+     window.print();
   }
 
 }

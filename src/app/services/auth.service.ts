@@ -7,10 +7,14 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   travelData: any;
   storedDestination: string = "";
+  itineraryFromDashboard: boolean= false;
+  showTravelData: boolean= false;
+  editItinerary: boolean= false;
+  editTripId: string= "";
 
   constructor(private http: HttpClient) { }
 
-  private baseURL= "https://login-project-ntv9.onrender.com";
+  private baseURL= "http://localhost:5000";
   public itineraryData: any;
 
   travelFormData: any = null;
@@ -47,12 +51,18 @@ getFormData() {
     return this.http.post(this.baseURL + '/api/auth/saveItinerary', data);
   }
 
-  getTripList(){
-    return this.http.get(this.baseURL + '/api/auth/getTripList');
+  updateItinerary(data: any){
+    return this.http.post(this.baseURL + '/api/auth/updateItinerary', data);
+  }
+
+  getTripList(data: any){
+    return this.http.post(this.baseURL + '/api/auth/getTripList', data);
     //return of({ data: [] });
   }
 
   deleteTrip(id : any){
     return this.http.post(this.baseURL + '/api/auth/deleteTrip', id);
   }
+
+  
 }

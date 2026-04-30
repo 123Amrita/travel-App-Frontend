@@ -2,7 +2,7 @@
   height: 60px;
   padding: 0 24px;
   background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -48,4 +48,14 @@
 .logout-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 14px rgba(255, 77, 77, 0.4);
+}
+
+@media print {
+  .app-header,
+  .logo,
+  .right-section,
+  .user-name,
+  .logout-btn {
+    display: none !important;
+  }
 }

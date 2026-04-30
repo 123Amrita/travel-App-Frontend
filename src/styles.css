@@ -31,3 +31,36 @@ body p-dropdown.ng-invalid.ng-touched .p-dropdown {
 body p-calendar.ng-invalid.ng-touched .p-calendar {
   border: 1px solid #e74c3c !important;
 }
+
+@media print {
+  app-header,
+  header.app-header,
+  .app-header,
+  .logo,
+  .right-section,
+  .user-name,
+  .logout-btn,
+  .topbar,
+  .layout-topbar,
+  .mat-toolbar,
+  .mat-drawer-side,
+  .sidebarIcons,
+  .itinerary-actions,
+  .btn,
+  .back-btn,
+  .back-btn1,
+  .p-dialog,
+  .fa,
+  .pi,
+  .icons {
+    display: none !important;
+  }
+
+  mat-sidenav-container,
+  mat-sidenav-content,
+  .container {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

@@ -100,7 +100,7 @@
 }
 
 .card{
-    margin-top: 3%;
+    margin-top: 2%;
     padding: 14px;
     width: 86%;
     /* background-color: #ceaca0; */
@@ -356,4 +356,270 @@
 .sidebarIcons:hover {
     background: rgba(255, 255, 255, 0.1);
     margin-left: -24%;
+}
+
+.trip-summary {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 17px;
+  color: #e2e8f0;
+}
+
+.trip-summary span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.itinerary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  /* margin-top: -137%; */
+  position: relative;
+  z-index: 50000;
+  margin-left: 10%;
+  margin-top: -144%;
+}
+
+.itinerary-actions {
+  display: flex;
+  gap: 12px;
+  float: right;
+  margin-right: 96px;
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.download-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.5);
+}
+
+.edit-btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.5);
+}
+
+.edit-btn:hover {
+  border-color: #ffffff;
+}
+
+.delete-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.5);
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* aligns buttons with text baseline */
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: -139%;
+  position: relative;
+  z-index: 50000;
+}
+
+.back-btn1 {
+  background: rgba(0, 0, 0, 0.5);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+  position: relative;
+  z-index: 50000;
+}
+
+.back-btn1:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.tripName{
+  font-family: 'Poppins', sans-serif;
+  z-index: 1000;
+  position: relative;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); 
+  font-size: 34px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 27px;
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+
+  /* Reset everything */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  }
+
+  .mat-drawer-container,
+  .mat-drawer-content,
+  .container {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  @page {
+    margin: 12mm;
+  }
+
+  /* Show ONLY print header */
+  .print-only {
+    display: block !important;
+  }
+
+  .print-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .print-header h1 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .print-header div {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  /* Hide all UI elements */
+  mat-sidenav,
+  .mat-drawer-side,
+  .mat-drawer-inner-container,
+  .backgroundMount,
+  .itinerary-actions,
+  .back-btn,
+  .back-btn1,
+  .btn,
+  .icons,
+  .fa,
+  .pi {
+    display: none !important;
+  }
+
+  /* Fix container (VERY IMPORTANT) */
+  .container {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Remove broken header (your UI one) */
+  .itinerary-header,
+  .tripName,
+  .trip-summary {
+    display: none !important;
+  }
+
+  /* Card layout */
+  .card {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    border: none !important;
+    background: white !important;
+  }
+
+  .card > div {
+    display: block !important;
+    grid-template-columns: none !important;
+  }
+
+  /* Day cards */
+  .dayCard {
+    width: 100% !important;
+    margin-bottom: 15px !important;
+    border-radius: 6px !important;
+    background: white !important;
+    page-break-inside: avoid !important;
+     border: none !important;
+  box-shadow: none !important;
+  padding: 8px 0 !important;
+  }
+
+  .dayCard:nth-child(odd),
+  .dayCard:nth-child(even) {
+    background: white !important;
+  }
+
+  .day-header {
+    margin-bottom: 8px !important;
+  }
+
+  .day-title {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  ul {
+    margin-left: 16px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  mat-sidenav-content,
+.mat-drawer-content {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+.section-divider {
+  display: none !important;
+}
 }
