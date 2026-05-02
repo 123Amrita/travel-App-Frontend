@@ -112,7 +112,7 @@ export class ItineraryPageComponent {
   updateItinerary(){
    this.spinnerOn= true;
    this.authService.updateItinerary(this.authService.travelData).subscribe( (res : any) => {
-      if(res.status === 200){
+      if(res.status === "200"){
         this.spinnerOn= false;
         this.message= "Your Trip Plan is updated and saved.";
         this.router.navigate(['/usersList']);
