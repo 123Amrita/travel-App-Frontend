@@ -105,7 +105,14 @@ export class ItineraryPageComponent {
   deleteItinerary(){
     this.spinnerOn= true;
     this.authService.deleteTrip({"id": this.authService.travelData._id}).subscribe((res : any) => {
+       if(res.status === 200){
        console.log(res);  
+       this.spinnerOn= false;
+       }    
+    },
+    (error) => {
+      this.message= "There's some issue saving this. Please try again later.";
+      this.spinnerOn= false;
     })
   }
 
