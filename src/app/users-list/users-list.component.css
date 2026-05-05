@@ -177,7 +177,11 @@ th, td {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0.2)
+  );
 }
 
 .trekOptions{
@@ -220,12 +224,8 @@ th, td {
 }
 
 .planTrip {
-  background: linear-gradient(135deg, #4f46e5, #2563eb);
   color: white;
   border: none;
-  padding: 10px 18px;
-  border-radius: 25px;
-  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   float: right;
@@ -233,6 +233,10 @@ th, td {
   position: relative;
   z-index: 800;
   margin-right: 2%;
+  background: #6366f1;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 500;
 }
 
 .planTrip:hover {

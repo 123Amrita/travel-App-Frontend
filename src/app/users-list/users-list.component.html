@@ -21,8 +21,8 @@
     margin-top: 27px;
     color: #d4c7c7;">
             <h2 style="font-size: 26px;
-    font-weight: 600;">Hello {{userName}}!</h2>
-            <p style="font-size: 14px;">Welcome back and explore trekking with us.</p>
+    font-weight: 600;">Hello {{userName}} 👋</h2>
+            <p style="font-size: 14px;">Welcome back — plan your next trek</p>
 
             <div style="font-size: 22px;
   font-weight: 600;
@@ -65,7 +65,7 @@
     margin-top: -23%;
     margin-left: 2%;
     line-height: 1.5;"> {{ trip.description }}</div>
-                        <button class="planTrip" (click)="goToCreateItinerary(trip.name)"> Plan Your Trip </button>
+                        <button class="planTrip" (click)="goToCreateItinerary(trip.name)"> Create Itinerary </button>
                     </div>
                 </ng-template>
             </p-carousel>
@@ -74,11 +74,12 @@
             <p style="font-size: 22px;
   font-weight: 600;
   color: #e5e7eb;
-  margin-bottom: 20px;margin-top: 1%;">Your Saved Trips</p>
+  margin-bottom: 20px;margin-top: 1%;">Your Trips (Personalized)</p>
             <div style="margin-top:10px">
                 
                 <div class="saved-container" *ngIf="tripList && tripList.length > 0">
                     <div class="saved-card" *ngFor="let trip of tripList" (click)="showSavedItinerary(trip)">
+                        
                         <img [src]="trip.picture" class="thumb" />
 
                         <div class="content">
@@ -91,9 +92,8 @@
   display: flex;
   gap: 10px;">{{ trip.days }} Days | Difficulty Level- {{ trip.difficulty?.name }}</p>
                             <p style="margin-top: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #38bdf8;">Total Budget- {{ trip.totalBudget }}</p>
+  font-size: 15px;color: #22c55e;
+  font-weight: 600;">Total Budget- {{ trip.totalBudget }}</p>
                             <!-- <i class="fa-solid fa-trash delete-btn" title="Delete the trip" 
                              (click)="deleteTrip(trip._id)"></i> -->
                         </div>
