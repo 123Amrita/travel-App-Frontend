@@ -7,7 +7,7 @@
 }
 
 .mat-drawer-container {
-    height:826px;
+    /* height:826px; */
     margin-top: -4%;
 }
 
@@ -21,8 +21,18 @@
     padding-left: 18px;
 }
 
-.mat-drawer-content{
-        margin-left: 1px !important;
+.mat-drawer-content {
+    padding-top: 3%;
+    padding-left: 3%;
+}
+
+@media (max-width: 768px) {
+
+  .mat-drawer-content {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
 }
 
 .mat-drawer-side {
@@ -220,7 +230,8 @@ th, td {
 .wrapper {
   position: relative;
   height: 500px;
-  width: 650px
+  width: 100%;
+  max-width: 650px;
 }
 
 .planTrip {
@@ -254,4 +265,146 @@ th, td {
 
 .delete-btn:hover {
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .mat-drawer-content {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .card {
+    width: 95% !important;
+    margin: 12px auto !important;
+    /* padding: 10px !important; */
+  }
+
+  .wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .p-carousel-content,
+  .p-carousel-container,
+  .p-carousel-items-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .p-carousel-content,
+  .p-carousel-container,
+  .p-carousel-items-content,
+  .p-carousel-items-container,
+  .p-carousel-item {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .p-carousel-item > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .wrapper,
+  .p-carousel-item,
+  .p-carousel-item > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  mat-sidenav {
+    display: none !important;
+  }
+
+  .mat-drawer-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+  }
+
+  .wrapper img,
+  .carousel-img {
+    height: 280px !important;
+    object-fit: cover !important;
+    border-radius: 18px !important;
+    padding: 5px;
+  }
+
+  .overlay-content,
+  .carousel-text {
+    padding: 14px !important;
+    bottom: 10px !important;
+  }
+
+  .overlay-content h2,
+  .carousel-text h2 {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .overlay-content p,
+  .carousel-text p {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    margin-top: -24% !important;
+    padding: 12px !important;
+    margin-left: -2% !important;
+  }
+
+  .planTrip {
+    width: auto !important;
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    margin-top: 24% !important;
+  }
+
+  .text-overlay{
+    margin-top: -46% !important;
+  }
+
+  .thumb{
+    width: 100% !important;
+    margin-left: 0% !important;
+  }
+
+  .mat-drawer-container {
+    margin-top: -15% !important;
+  }
+
+  .header-text{
+    margin-top: 61px !important;
+  }
+
+}
+
+.header-text{
+    margin-left: 35px;
+    margin-top: 27px;
+    color: #d4c7c7;
+}
+
+.overlay-content{
+border: none !important;
+position: relative;
+width: 100%;
+max-width: 650px;
+height: 500px;
+overflow: hidden;
+border-radius: 25px;    
+}
+
+.text-overlay{
+    margin-top: 2%;
 }

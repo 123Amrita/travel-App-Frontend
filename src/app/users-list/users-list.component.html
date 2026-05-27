@@ -15,11 +15,9 @@
     </mat-sidenav>
     <mat-sidenav-content style="margin-left: 0%;
     padding-top: 3%;
-    padding-left: 4%;height: 829px;">
+    padding-left: 4%;">
     <div class="trekOptions">
-<div style="margin-left: 35px;
-    margin-top: 27px;
-    color: #d4c7c7;">
+<div class="header-text">
             <h2 style="font-size: 26px;
     font-weight: 600;">Hello {{userName}} 👋</h2>
             <p style="font-size: 14px;">Welcome back — plan your next trek</p>
@@ -38,8 +36,7 @@
             <p-carousel [value]="destinations" [numVisible]="2" [numScroll]="1" [circular]="true"
                 [responsiveOptions]="responsiveOptions" [showIndicators]="false">
                 <ng-template let-trip pTemplate="item">
-                    <div
-                        style="border: none !important;position: relative;width: 650px;height: 500px;overflow: hidden;border-radius: 25px;">
+                    <div class="overlay-content">
                         <div class="wrapper">
                             <div class="overlay"></div>
                         <img [src]="trip.picture" [alt]="trip.name" class="w-full rounded-border" style="object-fit: cover;
@@ -49,28 +46,31 @@
     height: 100%;
     width: 100%;" />
                         </div>
-                        
-                        <div style="color: #ffffff;
+                        <div class="text-overlay">
+ <h2 style="color: #ffffff;
     font-size: 22px;
     font-weight: 600;
     position: absolute;
     z-index: 2;
     margin-top: -28%;
-    margin-left: 2%;">{{ trip.name }}</div>
-                        <div style="color: rgba(255, 255, 255, 0.85);
+    margin-left: 2%;">{{ trip.name }}</h2>
+                        <p style="color: rgba(255, 255, 255, 0.85);
     font-size: 14px;
     font-weight: 500;
     position: absolute;
     z-index: 2;
     margin-top: -23%;
     margin-left: 2%;
-    line-height: 1.5;"> {{ trip.description }}</div>
+    line-height: 1.5;"> {{ trip.description }}</p>
                         <button class="planTrip" (click)="goToCreateItinerary(trip.name)"> Create Itinerary </button>
+                        </div>
+                       
                     </div>
                 </ng-template>
             </p-carousel>
         </div>
-        <div style="background: radial-gradient(circle at top, #1e293b, #020617);padding: 40px;" class="card">
+        <div style="background: radial-gradient(circle at top, #1e293b, #020617);padding: 40px;padding-bottom: 6%;" 
+        class="card">
             <p style="font-size: 22px;
   font-weight: 600;
   color: #e5e7eb;

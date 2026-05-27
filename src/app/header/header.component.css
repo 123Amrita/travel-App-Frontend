@@ -86,3 +86,35 @@
   align-items: center;
   gap: 15px;
 }
+
+@media (max-width: 768px) {
+
+  .topbar,
+  .navbar,
+  .header {
+    padding: 10px 12px !important;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 22px !important;
+  }
+
+  .user-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px !important;
+  }
+
+  .logout-btn {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+
+  .tagline{
+    display: none !important;
+  }
+
+}

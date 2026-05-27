@@ -4,7 +4,10 @@
 @import "primeicons/primeicons.css";
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "@fortawesome/fontawesome-free/css/all.min.css";
-html, body { height: 100%; }
+html, body { height: 100%; 
+overflow-x: hidden;
+}
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .p-datepicker td.p-today > span {
